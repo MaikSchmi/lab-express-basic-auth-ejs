@@ -1,0 +1,9 @@
+<% if (user) { %>
+    <h2>Welcome, <%- user.username %>!</h2>
+    <p>What a beautiful profile page, please have a look around.</p>
+    <button>
+        <a href="/user-profile">Reload</a>
+    </button>
+<% } else { %>
+    <p>Login failed, please try again.</p>
+<% }%>

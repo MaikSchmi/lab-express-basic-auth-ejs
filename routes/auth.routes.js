@@ -45,7 +45,33 @@ router.post("/auth/signup", async (req, res, next) => {
 });
 
 router.get("/auth/login", (req, res, next) => {
-  res.render("auth/login");
+  res.render("auth/login", {errorMessage: ""});
+});
+
+router.post("/auth/login", async (req, res, next) => {
+  const { username, password } = req.body;
+
+  if (username === "" || password === "") {
+    res.render("auth/login", {errorMessage: "Please enter a valid username and password."});
+    return;
+  }
+
+  try {
+    const user = await User.findOne({username});
+    if (!user) {
+      res.render("auth/login", {errorMessage: "This user does not exist."});
+      return;
+    } else if (bcrypt.compareSync(password, user.passwordHash)) {
+      res.render("users/user-profile", { user });
+    } else {
+      res.render("auth/login", {errorMessage: "Incorrect password."});
+    }
+  } catch (error) {
+    console.log("Error in user login: ", error);
+    next(error);
+  }
+
+  res.render("auth/login", {errorMessage: ""});
 });
 
 module.exports = router;

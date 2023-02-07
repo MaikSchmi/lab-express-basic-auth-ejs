@@ -1,8 +1,8 @@
 <h2 style="text-align: center;">Login</h2>
 <form action="/auth/login" method="POST" style="display: flex; flex-direction: column; align-items: center">
-    <label>Username: <input type="text" name="username"/></label>
-    <label>Password: <input type="password" name="password"/></label>
-    <button type="submit">Create Account</button>
+    <label>Username: <input type="text" name="username" placeholder="Username"/></label>
+    <label>Password: <input type="password" name="password" placeholder="**********"/></label>
+    <button type="submit">Login</button>
     <% if(errorMessage) { %>
         <p class="error" style="color: white; padding: 20px; border: 1px black solid; background-color: red;"><%= errorMessage %></p>
       <% } %>
