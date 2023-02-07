@@ -2,7 +2,11 @@
     <h2>Welcome, <%- userInSession.username %>!</h2>
     <p>What a beautiful profile page, please have a look around.</p>
     <button>
-        <a href="/auth/userProfile">Reload</a>
+        <a href="/users/profile">Reload</a><br>
+    </button>
+    <br><br><br><br>
+    <button>
+        <a href="/users/favouriteGif">Click here for a great gif!</a>
     </button>
 <% } else { %>
     <p>Login failed, please try again.</p>
