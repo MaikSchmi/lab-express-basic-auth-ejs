@@ -4,7 +4,18 @@ const { Schema, model } = require("mongoose");
 const userSchema = new Schema({
   username: {
     type: String,
-    unique: true
+    unique: true,
+    required: [true, "Username is required."],
+    trim: true,
+    lowercase: true,
+  },
+  email: {
+    type: String,
+    required: [true, "Email is required."],
+    match: [/^\S+@\S+\.\S+$/, "Plase use a valid email address."],
+    unique: true,
+    lowercase: true,
+    trim: true,
   },
   passwordHash: String
 });

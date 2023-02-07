@@ -3,8 +3,9 @@
     <label>Username: <input type="text" name="username"/></label>
     <label>Password: <input type="password" name="password"/></label>
     <button type="submit">Create Account</button>
-    <div id="error" style="color: red; font-weight: bold;"><%=error%></div>
-    
+    <% if(errorMessage) { %>
+        <p class="error" style="color: white; padding: 20px; border: 1px black solid; background-color: red;"><%= errorMessage %></p>
+      <% } %>
 </form>
 
 <div style="text-align: center; margin-top: 10px;"><a href="#">Forgot your password?</a></div>
