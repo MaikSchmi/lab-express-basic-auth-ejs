@@ -62,7 +62,9 @@ router.post("/auth/login", async (req, res, next) => {
       res.render("auth/login", {errorMessage: "This user does not exist."});
       return;
     } else if (bcrypt.compareSync(password, user.passwordHash)) {
-      res.render("users/user-profile", { user });
+      console.log("SESSION ========> ", req.session);
+      req.session.currentUser = user;
+      res.redirect("./userProfile");
     } else {
       res.render("auth/login", {errorMessage: "Incorrect password."});
     }
@@ -70,8 +72,17 @@ router.post("/auth/login", async (req, res, next) => {
     console.log("Error in user login: ", error);
     next(error);
   }
+});
 
-  res.render("auth/login", {errorMessage: ""});
+router.get("/auth/userProfile", (req, res, next) => {
+  res.render("auth/user-profile", {userInSession: req.session.currentUser})
+});
+
+router.post("/auth/logout", (req, res, next) => {
+  req.session.destroy(err => {
+    if (err) next(err);
+    res.redirect("/");
+  });
 });
 
 module.exports = router;
